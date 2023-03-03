@@ -3,8 +3,6 @@
 
 var currentDirectory = System.IO.Directory.GetCurrentDirectory();
 var gsProgramPath = System.IO.Path.Combine(currentDirectory, "GhostScript\\gswin64c.exe");
-var inputFile = System.IO.Path.Combine(currentDirectory, "input2.pdf");
-var outputFile = System.IO.Path.Combine(currentDirectory, "output.pdf");
 
 void CompressPdf(string inputPath, string outputPath)
 {
@@ -34,17 +32,28 @@ void CompressPdf(string inputPath, string outputPath)
         UseShellExecute = false,
         RedirectStandardOutput = true,
         RedirectStandardError = true
-    }).WaitForExit();
+    })!.WaitForExit();
 }
 
-CompressPdf(inputFile, outputFile);
-
-
-Console.WriteLine($"{new FileInfo(inputFile).Length / 1024} KB");
-Console.WriteLine($"{new FileInfo(outputFile).Length / 1024} KB");
-
-Process.Start(new ProcessStartInfo
+var inputFiles = Directory.GetFiles(currentDirectory + "/input", "*.pdf", SearchOption.AllDirectories);
+foreach (var inputFile in inputFiles)
 {
-    FileName = outputFile,
-    UseShellExecute = true
-});
+    var outputFile = Path.Combine(currentDirectory, "output", Path.GetFileNameWithoutExtension(inputFile) + "_compressed" + Path.GetExtension(inputFile));
+    Directory.CreateDirectory(Path.GetDirectoryName(outputFile)!);
+
+    CompressPdf(inputFile, outputFile);
+
+    Console.WriteLine($"{Path.GetFileName(inputFile)} {new FileInfo(inputFile).Length / 1024} KB");
+    Console.WriteLine($"{Path.GetFileName(outputFile)} {new FileInfo(outputFile).Length / 1024} KB");
+    Console.WriteLine();
+}
+
+
+
+
+
+// Process.Start(new ProcessStartInfo
+// {
+//     FileName = outputFile,
+//     UseShellExecute = true
+// });
