@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 //convert doc to pdf https://smallpdf.com/word-to-pdf
-var gsProgramPath = @"C:\Program Files\gs\gs10.00.0\bin\gswin64.exe";
+
 var currentDirectory = System.IO.Directory.GetCurrentDirectory();
+var gsProgramPath = System.IO.Path.Combine(currentDirectory, "GhostScript\\gswin64c.exe");
 var inputFile = System.IO.Path.Combine(currentDirectory, "input2.pdf");
 var outputFile = System.IO.Path.Combine(currentDirectory, "output.pdf");
 
