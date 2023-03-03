@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "CompressPDFCSharp/1.0.0": {
+        "runtime": {
+          "CompressPDFCSharp.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CompressPDFCSharp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
